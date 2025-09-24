@@ -32,27 +32,21 @@ STUB_WARN_ONCE(pid_t, getpid, 2);
 STUB_WARN_ONCE(pid_t, getppid, 1);
 STUB_WARN_ONCE(char *, secure_getenv, NULL);
 
-char *argv[] = { (char*)"hello" , (char*)NULL};
-
-void print_c_stuff() {
-	printf("Hello from C\n");
-}
-
-void print_ocaml_stuff() {
+void ocaml_entry() {
 	static const value * func = NULL;
 	if (func == NULL) {
-    func = caml_named_value ("ocaml_entry");
+		func = caml_named_value ("ocaml_entry");
 	}
-  if (func == NULL) {
-    printf("unable to call ocaml\n");
-  } else {
+	if (func == NULL) {
+		printf("unable to call ocaml\n");
+	} else {
 		caml_callback(*func, Val_unit);
 	}
 }
 
 void ocaml_init() {
-  print_c_stuff();
+	// printf("Hello from C\n");
+	print_c_stuff();
 	caml_startup(argv);
-  printf("caml startup complete!\n");
-  print_ocaml_stuff();
+	ocaml_entry();
 }

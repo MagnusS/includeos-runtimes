@@ -1,0 +1,32 @@
+diff --git a/src/musl/mmap.cpp b/src/musl/mmap.cpp
+index 1f452dde0..b9b383e98 100644
+--- a/src/musl/mmap.cpp
++++ b/src/musl/mmap.cpp
+@@ -74,11 +74,11 @@ static void* sys_mmap(void * addr, size_t length, int /*prot*/, int flags,
+     return MAP_FAILED;
+   }
+
+-  if ((flags & MAP_FIXED) > 0) {
++  /*if ((flags & MAP_FIXED) > 0) {
+     Expects(false && "MAP_FIXED not supported.");
+     errno = ENOTSUP;
+     return MAP_FAILED;
+-  }
++  }*/
+
+   if (((flags & MAP_PRIVATE) > 0) && ((flags & MAP_ANONYMOUS) == 0)) {
+     Expects(false && "MAP_PRIVATE only supported for MAP_ANONYMOUS");
+@@ -86,11 +86,11 @@ static void* sys_mmap(void * addr, size_t length, int /*prot*/, int flags,
+     return MAP_FAILED;
+   }
+
+-  if (((flags & MAP_PRIVATE) > 0) && (addr != 0)) {
++  /*if (((flags & MAP_PRIVATE) > 0) && (addr != 0)) {
+     Expects(false && "MAP_PRIVATE only supported for new allocations (address=0).");
+     errno = ENOTSUP;
+     return MAP_FAILED;
+-  }
++  }*/
+
+   if (((flags & MAP_SHARED) == 0) && ((flags & MAP_PRIVATE) == 0)) {
+     Expects(false && "MAP_SHARED or MAP_PRIVATE must be set.");
