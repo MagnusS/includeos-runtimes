@@ -44,9 +44,10 @@ void ocaml_entry() {
 	}
 }
 
+char *argv[] = { (char*)"hello" , (char*)NULL};
+
 void ocaml_init() {
 	// printf("Hello from C\n");
-	print_c_stuff();
 	caml_startup(argv);
 	ocaml_entry();
 }
